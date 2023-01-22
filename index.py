@@ -50,8 +50,27 @@ for s in range(number_of_simulations):
 
     final_amount[s] = portfolio_returns[-1, s]
 
+amount_99 = str(np.percentile(final_amount, 1))
+amount_95 = str(np.percentile(final_amount, 5))
+avarage_amount = str(np.percentile(final_amount, 50))
+profit_scenarios = str((len(final_amount[final_amount > initial_capital])/ 
+len(final_amount)) * 100) + "%"
+
+print("\n_____________ Final Results _____________")
+
+print(f'''\n \n When Investing {initial_capital} on a portfolio with {stocks_list} by {projected_days / 252} 
+        years, using Monte Carlo Algorith to generate {number_of_simulations}, we discovered:
+
+    50% of probability that the final amount is higher than {avarage_amount},
+    95% of probability that the final amount is higher than {amount_95} and
+    95% of probability that the final amount is higher than {amount_99}.
+
+    In {profit_scenarios[:2]} times, it could be possible to have profit on the next {projected_days / 252} years!
+''')
 
 plt.plot(portfolio_returns, linewidth=1)
 plt.xlabel('Money')
 plt.ylabel('Days')
 plt.show()
+
+
